@@ -1,6 +1,5 @@
 venv
 game.drawio
-game_ER.png
 helloapp/migrations
 __pycache__
 db.sqlite3
