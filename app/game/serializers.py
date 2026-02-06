@@ -1,9 +1,13 @@
 from rest_framework import serializers
-from game.models import Tutorial
+from game.models import PC, NPC
 
 
-class TutorialSerializer(serializers.ModelSerializer):
+class PCSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Tutorial
-        fields = ('id', 'title', 'tutorial_url', 'image_path', 'description',
-                  'published')
+        model = PC
+        fields = ('id', 'name')
+
+class NPCSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = NPC
+        fields = ('id', 'name', 'npc_type', 'dialouge')

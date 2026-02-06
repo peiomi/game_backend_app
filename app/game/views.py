@@ -5,20 +5,14 @@ from rest_framework import status
 from rest_framework.renderers import TemplateHTMLRenderer
 from rest_framework.response import Response
 from rest_framework.views import APIView
-
-from game.models import Tutorial
-from game.serializers import TutorialSerializer
+from game.models import PC, NPC
+from game.serializers import PCSerializer, NPCSerializer
 from rest_framework.decorators import api_view
 
 # Create your views here.
 # def index(request):
 #     return render(request, "tutorials/index.html")
 
-
-def index(request):
-    print("------------------------- I AM HERE")
-    queryset = Tutorial.objects.all()
-    return render(request, "tutorials/index.html", {'tutorials': queryset})
 
 
 class index(APIView):

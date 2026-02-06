@@ -1,5 +1,5 @@
 from django.apps import AppConfig
 
 
-class TutorialsConfig(AppConfig):
-    name = 'tutorials'
+class GameConfig(AppConfig):
+    name = 'game'
