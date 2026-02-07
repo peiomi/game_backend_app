@@ -1,6 +1,6 @@
 venv
 game.drawio
-helloapp/migrations
+migrations
 __pycache__
 .dockerignore
 .vscode
