@@ -21,6 +21,9 @@ class Event(models.Model):
     session = models.ForeignKey(Session, on_delete=models.CASCADE)
     details = models.TextField()
 
+class Spell(models.Model):
+    title = models.CharField(max_length=50, blank=False, default='')
+    description = models.TextField()
 
 class Item(models.Model):
     title = models.CharField(max_length=50, blank=False, default='')
