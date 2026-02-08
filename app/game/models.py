@@ -4,6 +4,7 @@ from django.utils import timezone
 
 class PC(models.Model):
     name = models.CharField(max_length=50, blank=False, default='')
+    player = models.ForeignKey('players.Player', on_delete=models.CASCADE, default='')
 
 class NPC(models.Model):
     name = models.CharField(max_length=50, blank=False, default='')
