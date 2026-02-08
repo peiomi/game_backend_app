@@ -37,6 +37,6 @@ class Quest(models.Model):
     title = models.CharField(max_length=50, blank=False, default='')
     event_trigger = models.ForeignKey(Event, on_delete=models.CASCADE)
     description = models.TextField()
-    status = models.CharField(max_length=20, choice=status_choices, blank=False, default='available')
+    status = models.CharField(max_length=20, choices=status_choices, blank=False, default='available')
     reward = models.ForeignKey(Item, on_delete=models.CASCADE)
 
