@@ -15,3 +15,9 @@ class Session(models.Model):
     start_time = models.DateTimeField(default=timezone.now)
     end_time = models.DateTimeField(null=True, blank=True)
 
+class Event(models.Model):
+    timestamp = models.DateTimeField(default=timezone.now)
+    event_type = models.CharField(max_length=50, blank=False, default='')
+    session = models.ForeignKey(Session, on_delete=models.CASCADE)
+    details = models.TextField()
+
