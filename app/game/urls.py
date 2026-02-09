@@ -4,7 +4,7 @@ from django.conf.urls.static import static
 from django.conf import settings
 
 urlpatterns = [
-    path('api/spells/', views.spells_list, name='spell-list'),
+    path('api/spells/', views.spell_list, name='spell-list'),
     path('api/spells/<int:pk>/', views.spell_detail, name='spell-detail'),
 
     path('api/pcs/', views.pc_list, name='pc-list'),
