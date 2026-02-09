@@ -120,7 +120,39 @@ def npc_detail(request, pk):
     elif request.method == 'DELETE':
         npc.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+    
+# session views
+@api_view(['GET', 'POST'])
+def session_list(request):
+    if request.method == 'GET':
+        sessions = Session.objects.all()
+        serializer = SessionSerializer(sessions, many=True)
+        return Response(serializer.data)
 
+    elif request.method == 'POST':
+        serializer = SessionSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+@api_view(['GET', 'PUT', 'DELETE'])
+def session_detail(request, pk):
+    session = get_object_or_404(Session, pk=pk)
+    if request.method == 'GET':
+        serializer = SessionSerializer(session)
+        return Response(serializer.data)
+    
+    elif request.method == 'PUT':
+        serializer = SessionSerializer(session, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+    elif request.method == 'DELETE':
+        session.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 
 # def index(request):
