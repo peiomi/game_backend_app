@@ -254,7 +254,75 @@ def quest_detail(request, pk):
         quest.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
     
+# inventory views
+@api_view(['GET', 'POST'])
+def inventory_list(request):
+    if request.method == 'GET':
+        inventories = Inventory.objects.all()
+        serializer = InventorySerializer(inventories, many=True)
+        return Response(serializer.data)
 
+    elif request.method == 'POST':
+        serializer = InventorySerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['GET', 'PUT', 'DELETE'])
+def inventory_detail(request, pk):
+    inventory = get_object_or_404(Inventory, pk=pk)
+
+    if request.method == 'GET':
+        serializer = InventorySerializer(inventory)
+        return Response(serializer.data)
+
+    elif request.method == 'PUT':
+        serializer = InventorySerializer(inventory, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    elif request.method == 'DELETE':
+        inventory.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+    
+# inventory items views
+@api_view(['GET', 'POST'])
+def inventory_item_list(request):
+    if request.method == 'GET':
+        inventory_items = InventoryItem.objects.all()
+        serializer = InventoryItemSerializer(inventory_items, many=True)
+        return Response(serializer.data)
+
+    elif request.method == 'POST':
+        serializer = InventoryItemSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['GET', 'PUT', 'DELETE'])
+def inventory_item_detail(request, pk):
+    inventory_item = get_object_or_404(InventoryItem, pk=pk)
+
+    if request.method == 'GET':
+        serializer = InventoryItemSerializer(inventory_item)
+        return Response(serializer.data)
+
+    elif request.method == 'PUT':
+        serializer = InventoryItemSerializer(inventory_item, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    elif request.method == 'DELETE':
+        inventory_item.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 # def index(request):
 #     return render(request, "tutorials/index.html")
