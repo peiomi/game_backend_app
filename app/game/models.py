@@ -14,7 +14,7 @@ class PC(models.Model):
 class NPC(models.Model):
     name = models.CharField(max_length=50, blank=False, default='')
     npc_type = models.CharField(max_length=50, blank=False, default='')
-    dialouge = models.TextField()
+    dialogue = models.TextField()
 
 class Session(models.Model):
     player = models.ForeignKey('players.Player', on_delete=models.CASCADE)
@@ -46,7 +46,7 @@ class Quest(models.Model):
     reward = models.ForeignKey(Item, on_delete=models.CASCADE)
 
 class Inventory(models.Model):
-    player = models.OneToOneField('players.Player', on_delete=models.CASCADE, related_name='inventory')
+    player_c = models.OneToOneField(PC, on_delete=models.CASCADE, related_name='inventory', default='')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -57,3 +57,6 @@ class InventoryItem(models.Model):
     inventory = models.ForeignKey(Inventory, on_delete=models.CASCADE, related_name='items')
     item = models.ForeignKey(Item, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(default=1)
+
+    class Meta:
+        unique_together = ('inventory', 'item')
