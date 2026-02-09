@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from game.models import PC, NPC, Spell, Session, Event, Item, Quest, Inventory, InventoryItem
 
-class Spell(serializers.ModelSerializer):
+class SpellSerializer(serializers.ModelSerializer):
     class Meta:
         model = Spell
         fields = ('id', 'title', 'description')
@@ -16,32 +16,32 @@ class NPCSerializer(serializers.ModelSerializer):
         model = NPC
         fields = ('id', 'name', 'npc_type', 'dialogue')
 
-class Session(serializers.ModelSerializer):
+class SessionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Session
         fields = ('id', 'player', 'start_time', 'end_time')
 
-class Event(serializers.ModelSerializer):
+class EventSerializer(serializers.ModelSerializer):
     class Meta:
         model = Event
         fields = ('id', 'timestamp', 'event_type', 'session', 'details')
 
-class Item(serializers.ModelSerializer):
+class ItemSerializer(serializers.ModelSerializer):
     class Meta:
         model = Item
         fields = ('id', 'title', 'description')
 
-class Quest(serializers.ModelSerializer):
+class QuestSerializer(serializers.ModelSerializer):
     class Meta:
         model = Quest
         fields = ('id', 'title', 'event_trigger', 'description', 'status', 'reward')
 
-class Inventory(serializers.ModelSerializer):
+class InventorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Inventory
         fields = ('id', 'player_c', 'created_at', 'updated_at')
 
-class InventoryItem(serializers.ModelSerializer):
+class InventoryItemSerializer(serializers.ModelSerializer):
     class Meta:
         model = InventoryItem
         fields = ('id', 'inventory', 'item', 'quantity')
