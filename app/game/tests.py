@@ -39,10 +39,17 @@ def test_inventory_and_items():
     pc = PC.objects.create(name="Meg", player=player)
     inventory = Inventory.objects.create(player_c=pc)
     item = Item.objects.create(title="Idol", description="Teleports")
-    InventoryItem.objects.create(inventory=inventory, item=item, quantity=1)
 
+    pc2 = PC.objects.create(name="Bonnie", player=player)
+    inventory2 = Inventory.objects.create(player_c=pc2)
+    item2 = Item.objects.create(title="Potion", description="Poison")
+
+    InventoryItem.objects.create(inventory=inventory, item=item, quantity=1)
+    InventoryItem.objects.create(inventory=inventory2, item=item2, quantity=2)
+    
     with pytest.raises(Exception):
         InventoryItem.objects.create(inventory=inventory, item=item, quantity=2)
+
 
 @pytest.mark.django_db
 def test_spell_serializer():
